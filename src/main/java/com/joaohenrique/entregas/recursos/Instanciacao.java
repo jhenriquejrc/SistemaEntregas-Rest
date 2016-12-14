@@ -23,6 +23,8 @@ public class Instanciacao {
 
     @Autowired
     private FornecedorRepositorio fornecedorRepo;
+
+    @Autowired
     private ProdutoRepositorio produtoRepo;
 
     @RequestMapping(method= RequestMethod.GET)
