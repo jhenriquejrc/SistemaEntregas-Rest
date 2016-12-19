@@ -42,7 +42,8 @@ public class FornecedorServico {
             erros.add("Favor preencher um valor válido para o faturamento anual");
         }
         if (x.getDataCadastro()==null) {
-            erros.add("Favor preencher um valor válido para a data de cadastro");
+		x.setDataCadastro(Calendar.getInstance().getTime());
+            
         }
 
         if (!erros.isEmpty()) {
@@ -54,20 +55,7 @@ public class FornecedorServico {
         Fornecedor aux = repoCustom.buscarNomeExato(x.getNome());
         if (aux != null) {
             throw new ServicoException("Já existe um fornecedor com esse nome!", 1);
-        }
-        
-         if(aux.getDataCadastro!=null && !aux.getDataCadastro.isEmpty()){
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        	try {
-				aux.setDataCadastro(sdf.parse(aux.getDataCadastro));
-			} catch (ParseException e) {
-				System.out.println("Instanciacao: data de cadastro invalido");
-			}
-        } else{
-        	aux.setDataCadastro(Calendar.getInstance().getTime());
-        }
-
-        
+        }     
         
         validar(x);
         return repo.save(x);
