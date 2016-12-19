@@ -53,6 +53,20 @@ public class FornecedorServico {
         if (aux != null) {
             throw new ServicoException("Já existe um fornecedor com esse nome!", 1);
         }
+        
+         if(aux.getDataCadastro!=null && !aux.getDataCadastro.isEmpty()){
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        	try {
+				aux.setDataCadastro(sdf.parse(aux.getDataCadastro));
+			} catch (ParseException e) {
+				System.out.println("Instanciacao: data de cadastro invalido");
+			}
+        } else{
+        	aux.setDataCadastro(Calendar.getInstance().getTime());
+        }
+
+        
+        
         validar(x);
         return repo.save(x);
     }
